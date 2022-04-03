@@ -25,9 +25,28 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Packer GitHub Actions
-        uses: hashicorp/packer-github-actions@v0.2.0
-        command: "packer validate devopsbox.pkr.hcl"
+      - name: Fix Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: fix
+
+      # validate templates
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: packer.pkr.hcl
+
+      # build artifact
+      - name: Build Artifact
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort"
+          target: packer.pkr.hcl
+        env:
+          PACKER_LOG: 1
 
 
       # # Runs a single command using the runners shell
