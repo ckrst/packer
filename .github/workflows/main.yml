@@ -27,6 +27,7 @@ jobs:
 
       - name: Packer GitHub Actions
         uses: hashicorp/packer-github-actions@v0.2.0
+        command: "packer validate devopsbox.pkr.hcl"
 
 
       # # Runs a single command using the runners shell
