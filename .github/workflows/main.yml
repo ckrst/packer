@@ -25,11 +25,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # - name: Fix Template
-      #   uses: hashicorp/packer-github-actions@master
-      #   with:
-      #     command: fix
-
       # validate templates
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
@@ -43,7 +38,7 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: "-color=false -on-error=abort"
+          arguments: "-color=true -on-error=abort"
           target: devopsbox.pkr.hcl
         env:
           PACKER_LOG: 1
