@@ -37,7 +37,7 @@ jobs:
     steps:
       # build artifact
       - name: Build Artifact
-        uses: ckrst/packer-actions@main
+        uses: ckrst/packer-action@main
         with:
           command: build
           arguments: "-color=true -on-error=abort"
