@@ -32,9 +32,10 @@ jobs:
           command: validate
           arguments: -syntax-only
           target: devopsbox.pkr.hcl
-
   build:
     environment: prod
+    runs-on: ubuntu-latest
+    steps:
       # build artifact
       - name: Build Artifact
         uses: hashicorp/packer-github-actions@master
