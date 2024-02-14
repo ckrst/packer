@@ -14,7 +14,7 @@ variable "architecture" {
 locals {
     packer_version = "1.10.1"
     packer_architecture = var.architecture
-    packer_url = "https://releases.hashicorp.com/packer/${var.packer_version}/packer_${var.packer_version}_linux_${var.packer_architecture}.zip"
+    packer_url = "https://releases.hashicorp.com/packer/${local.packer_version}/packer_${local.packer_version}_linux_${local.packer_architecture}.zip"
 }
 
 source "docker" "devopsbox" {
