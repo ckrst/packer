@@ -1,3 +1,22 @@
+
+variable "version" {
+    type = string
+    default = "0.1.1"
+    description = "Version of the image"
+}
+
+variable "architecture" {
+    type = string
+    default = "amd64"
+    description = "Architecture of the image"
+}
+
+locals {
+    packer_version = "1.10.1"
+    packer_architecture = var.architecture
+    packer_url = "https://releases.hashicorp.com/packer/${var.packer_version}/packer_${var.packer_version}_linux_${var.packer_architecture}.zip"
+}
+
 source "docker" "devopsbox" {
     image = "ubuntu:latest"
     export_path = "image.tar"
@@ -30,7 +49,7 @@ build {
     #packer
     provisioner "shell" {
         inline = [
-            "curl -fsSL https://releases.hashicorp.com/packer/1.8.0/packer_1.8.0_linux_amd64.zip -o /devops/tools/packer.zip",
+            "curl -fsSL ${local.packer_url} -o /devops/tools/packer.zip",
             "unzip /devops/tools/packer.zip -d /devops/tools",
         ]
     }
@@ -46,7 +65,7 @@ build {
     post-processors {
         post-processor "docker-import" {
             repository = "vinik/devopsbox"
-            tag = "0.1.0"
+            tag = var.version
         }
         post-processor "docker-push" {}
         post-processor "docker-tag" {
