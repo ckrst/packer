@@ -35,8 +35,6 @@ jobs:
       - name: Validate base image
         run: packer validate -var 'gcp_project_id=${{ vars.GCP_PROJECT_ID }}' -var 'gcp_credentials_json=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}' -var 'my_prefix=ckrst' base.pkr.hcl
       
-
-
       # validate templates
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
@@ -44,16 +42,20 @@ jobs:
           command: validate
           target: devopsbox.pkr.hcl
 
-  build:
+  build_base:
     environment: prod
     runs-on: ubuntu-latest
     steps:
-      # build artifact
-      - name: Build Artifact
+
+      # build base image
+      - name: Build base image
         uses: ckrst/packer-action@main
         with:
           command: build
           arguments: "-color=true -on-error=abort"
-          target: devopsbox.pkr.hcl
+          target: base.pkr.hcl
         env:
-          PACKER_LOG: 1
+          -PKR_VAR_gcp_project_id: ${{ vars.GCP_PROJECT_ID }}
+          -PKR_VAR_gcp_credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          -PKR_VAR_my_prefix: ckrst
+        
