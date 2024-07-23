@@ -34,7 +34,7 @@ jobs:
         with:
           command: validate
           target: base.pkr.hcl
-          arguments: "--var gcp_project_id=$GCP_PROJECT_ID --var gcp_credentials_json=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }} --var my_prefix=ckrst"
+          arguments: "-var 'gcp_project_id=$GCP_PROJECT_ID' -var 'gcp_credentials_json=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}' -var 'my_prefix=ckrst'"
       
 
 
