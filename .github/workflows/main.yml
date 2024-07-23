@@ -22,21 +22,22 @@ jobs:
 
 
       # init base image
-      - name: Validate Template
+      - name: Init base image
         uses: hashicorp/packer-github-actions@master
         with:
           command: init
           target: base.pkr.hcl
       
           # validate base image
-      - name: Validate Template
+      - name: Validate baser image
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
           target: base.pkr.hcl
+          arguments: "--var gcp_project_id=$GCP_PROJECT_ID"
       
-
           
+
       # validate templates
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
