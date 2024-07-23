@@ -43,6 +43,7 @@ jobs:
           target: devopsbox.pkr.hcl
 
   build_base:
+    needs: validate
     environment: prod
     runs-on: ubuntu-latest
     steps:
