@@ -15,6 +15,7 @@ on:
 jobs:
   
   validate:
+    name: Validate images
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -43,6 +44,7 @@ jobs:
           target: devopsbox.pkr.hcl
 
   build_base:
+    name: Build base image
     needs: validate
     environment: prod
     runs-on: ubuntu-latest
@@ -63,9 +65,4 @@ jobs:
 
       # build base image
       - name: Build base image
-        run: packer build base.pkr.hcl
-        env:
-          -PKR_VAR_gcp_project_id: ${{ vars.GCP_PROJECT_ID }}
-          -PKR_VAR_gcp_credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-          -PKR_VAR_my_prefix: ckrst
-        
+        run: packer build -var 'gcp_project_id=${{ vars.GCP_PROJECT_ID }}' -var 'gcp_credentials_json=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}' -var 'my_prefix=ckrst' base.pkr.hcl
