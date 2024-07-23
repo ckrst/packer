@@ -10,14 +10,18 @@ packer {
 
 variable "gcp_project_id" {
   type = string
+  default = ""
 }
 
 variable "gcp_credentials_json" {
   type = string
+  default = ""
+
 }
 
 variable "my_prefix" {
   type = string
+  default = ""
 }
 
 locals {
