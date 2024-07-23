@@ -48,13 +48,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup `packer`
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with:
+          version: 1.11.1
+
+      - name: Run `packer init`
+        id: init
+        run: "packer init ./base.pkr.hcl"
+
       # build base image
       - name: Build base image
-        uses: ckrst/packer-action@main
-        with:
-          command: build
-          arguments: "-color=true -on-error=abort"
-          target: base.pkr.hcl
+        run: packer build base.pkr.hcl
         env:
           -PKR_VAR_gcp_project_id: ${{ vars.GCP_PROJECT_ID }}
           -PKR_VAR_gcp_credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
