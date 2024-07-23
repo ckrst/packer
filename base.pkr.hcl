@@ -28,7 +28,7 @@ locals {
   gcp_machine_type = "e2-micro"
   gcp_region = "us-central1"
   gcp_zone = "us-central1-a"
-  gcp_image_name = "${var.my_prefix}-base"
+  gcp_image_name = "${var.my_prefix}-base-{{timestamp}}"
 }
 
 source "googlecompute" "base" {
