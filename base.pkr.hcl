@@ -4,6 +4,10 @@ packer {
       source  = "github.com/hashicorp/googlecompute"
       version = "~> 1"
     }
+    docker = {
+      source  = "github.com/hashicorp/docker"
+      version = "~> 1"
+    }
   }
 }
 
