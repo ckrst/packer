@@ -36,6 +36,7 @@ locals {
 }
 
 source "googlecompute" "base" {
+    name = "googlecompute"
     project_id = var.gcp_project_id
     source_image_family = "ubuntu-2404-lts-amd64"
     zone = local.gcp_zone
@@ -49,6 +50,7 @@ source "googlecompute" "base" {
 }
 
 source "docker" "base" {
+    name = "docker"
     image = "ubuntu:24.04"
     export_path = "image.tar"
     changes = [
@@ -68,14 +70,14 @@ build {
             "sudo apt-get update",
             "sudo apt-get upgrade -y"
         ]
-        only = [ "source.googlecompute.base" ]
+        only = [ "googlecompute" ]
     }
     provisioner "shell" {
         inline = [
             "apt-get update",
             "apt-get upgrade -y"
         ]
-        only = [ "source.docker.base" ]
+        only = [ "docker" ]
     }
 
     post-processors  {      
@@ -92,7 +94,9 @@ build {
             tag = ["latest"]
             only = [ "source.docker.base" ]
         }
-        post-processor "docker-push" {}
+        post-processor "docker-push" {
+            only = [ "source.docker.base" ]
+        }
     }
 
     
