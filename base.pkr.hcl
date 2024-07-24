@@ -44,11 +44,20 @@ source "googlecompute" "base" {
     machine_type = local.gcp_machine_type   
 }
 
+source "docker" "base" {
+    image = "ubuntu:24.04"
+    export_path = "image.tar"
+    changes = [
+        "VOLUME /workdir"
+    ]
+}
+
 build {
     name = "base"
 
     sources = [
         "source.googlecompute.base"
+        "source.docker.base"
     ]
     provisioner "shell" {
         inline = [
@@ -57,5 +66,20 @@ build {
         ]
 
     }
+
+    post-processors  {      
+        only = [ "docker.base" ]
+        post-processor "docker-import" {
+            repository = "vinik/base"
+            tag = var.version
+        }
+        post-processor "docker-push" {}
+        post-processor "docker-tag" {
+            repository = "vinik/base"
+            tag = ["latest"]
+        }
+        post-processor "docker-push" {}
+    }
+
     
 }
