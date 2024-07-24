@@ -68,14 +68,14 @@ build {
             "sudo apt-get update",
             "sudo apt-get upgrade -y"
         ]
-        only = [ "googlecompute" ]
+        only = [ "base.googlecompute.base" ]
     }
     provisioner "shell" {
         inline = [
             "apt-get update",
             "apt-get upgrade -y"
         ]
-        only = [ "docker" ]
+        only = [ "base.docker.base" ]
     }
 
     post-processors  {      
