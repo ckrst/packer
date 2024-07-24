@@ -68,7 +68,14 @@ build {
             "sudo apt-get update",
             "sudo apt-get upgrade -y"
         ]
-
+        only = [ "source.googlecompute.base" ]
+    }
+    provisioner "shell" {
+        inline = [
+            "apt-get update",
+            "apt-get upgrade -y"
+        ]
+        only = [ "source.docker.base" ]
     }
 
     post-processors  {      
