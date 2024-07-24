@@ -60,8 +60,8 @@ build {
     name = "base"
 
     sources = [
-        "source.googlecompute.base",
-        "source.docker.base"
+        "source.googlecompute.google",
+        "source.docker.container"
     ]
     provisioner "shell" {
         inline = [
@@ -83,18 +83,18 @@ build {
         post-processor "docker-import" {
             repository = "vinik/base"
             tag = var.version
-            only = [ "source.docker.base" ]
+            only = [ "source.docker.container" ]
         }
         post-processor "docker-push" {
-            only = [ "source.docker.base" ]
+            only = [ "source.docker.container" ]
         }
         post-processor "docker-tag" {
             repository = "vinik/base"
             tag = ["latest"]
-            only = [ "source.docker.base" ]
+            only = [ "source.docker.container" ]
         }
         post-processor "docker-push" {
-            only = [ "source.docker.base" ]
+            only = [ "source.docker.container" ]
         }
     }
 
