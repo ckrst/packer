@@ -59,13 +59,6 @@ source "docker" "base" {
 build {
     name = "base"
 
-    source "docker.base" {
-      name = "docker"
-    }
-    source "googlecompute.base" {
-      name = "googlecompute"
-    }
-
     sources = [
         "source.googlecompute.base",
         "source.docker.base"
