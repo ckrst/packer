@@ -36,7 +36,6 @@ locals {
 }
 
 source "googlecompute" "base" {
-    name = "googlecompute"
     project_id = var.gcp_project_id
     source_image_family = "ubuntu-2404-lts-amd64"
     zone = local.gcp_zone
@@ -50,7 +49,6 @@ source "googlecompute" "base" {
 }
 
 source "docker" "base" {
-    name = "docker"
     image = "ubuntu:24.04"
     export_path = "image.tar"
     changes = [
@@ -60,6 +58,13 @@ source "docker" "base" {
 
 build {
     name = "base"
+
+    source "docker.base" {
+      name = "docker"
+    }
+    source "googlecompute.base" {
+      name = "googlecompute"
+    }
 
     sources = [
         "source.googlecompute.base",
