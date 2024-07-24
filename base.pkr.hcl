@@ -68,15 +68,18 @@ build {
     }
 
     post-processors  {      
-        only = [ "docker.base" ]
         post-processor "docker-import" {
             repository = "vinik/base"
             tag = var.version
+            only = [ "docker.base" ]
         }
-        post-processor "docker-push" {}
+        post-processor "docker-push" {
+            only = [ "docker.base" ]
+        }
         post-processor "docker-tag" {
             repository = "vinik/base"
             tag = ["latest"]
+            only = [ "docker.base" ]
         }
         post-processor "docker-push" {}
     }
