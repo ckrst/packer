@@ -56,7 +56,7 @@ build {
     name = "base"
 
     sources = [
-        "source.googlecompute.base"
+        "source.googlecompute.base",
         "source.docker.base"
     ]
     provisioner "shell" {
