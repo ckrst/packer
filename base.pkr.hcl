@@ -17,6 +17,18 @@ variable "version" {
 
 }
 
+# DOCKER
+variable "docker_hub_username" {
+  type = string
+  default = "-- Your docker hub username --"
+}
+
+variable "docker_hub_password" {
+  type = string
+  default = "-- Your docker hub password --"
+}
+
+# GCP
 variable "gcp_project_id" {
   type = string
   default = ""
@@ -91,6 +103,9 @@ build {
             only = [ "docker.container" ]
         }
         post-processor "docker-push" {
+            login = true
+            login_username = var.docker_hub_username
+            login_password = var.docker_hub_password
             only = [ "docker.container" ]
         }
         post-processor "docker-tag" {
@@ -99,6 +114,9 @@ build {
             only = [ "docker.container" ]
         }
         post-processor "docker-push" {
+            login = true
+            login_username = var.docker_hub_username
+            login_password = var.docker_hub_password
             only = [ "docker.container" ]
         }
     }
