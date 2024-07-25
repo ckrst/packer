@@ -11,6 +11,11 @@ packer {
   }
 }
 
+variable "version" {
+  type = string
+  default = "0.1.0"
+
+}
 
 variable "gcp_project_id" {
   type = string
