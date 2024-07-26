@@ -50,6 +50,7 @@ locals {
   gcp_region = "us-central1"
   gcp_zone = "us-central1-a"
   gcp_image_name = "${var.my_prefix}-base-{{timestamp}}"
+  gcp_image_family = "${var.my_prefix}-base"
 }
 
 source "googlecompute" "google" {
@@ -60,7 +61,7 @@ source "googlecompute" "google" {
     credentials_json  = var.gcp_credentials_json
     image_name = local.gcp_image_name
     image_description = "Base Image"
-    image_family = var.my_prefix
+    image_family = local.gcp_image_family
     disk_size = 10
     machine_type = local.gcp_machine_type   
 }
