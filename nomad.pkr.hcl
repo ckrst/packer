@@ -20,7 +20,9 @@ variable "my_prefix" {
 }
 
 locals {
-    gcp_zone = "${var.my_prefix}-zone"
+    gcp_machine_type = "e2-micro"
+    gcp_region = "us-central1"
+    gcp_zone = "us-central1-a"
     gcp_image_name = "${var.my_prefix}-nomad-{{timestamp}}"
     gcp_machine_type = "n1-standard-2"
     gcp_base_image_family = "${var.my_prefix}-base"
