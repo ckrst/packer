@@ -37,11 +37,11 @@ jobs:
         run: packer validate -var 'gcp_project_id=${{ vars.GCP_PROJECT_ID }}' -var 'gcp_credentials_json=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}' -var 'my_prefix=ckrst' base.pkr.hcl
       
       # validate nomad image
-      - name: Validate base image
+      - name: Validate nomad image
         run: packer validate -var 'gcp_project_id=${{ vars.GCP_PROJECT_ID }}' -var 'gcp_credentials_json=${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}' -var 'my_prefix=ckrst' nomad.pkr.hcl
       
       # validate templates
-      - name: Validate Template
+      - name: Validate devops box Template
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
