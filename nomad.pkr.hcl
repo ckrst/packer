@@ -51,6 +51,9 @@ build {
             "sudo apt-get update",
             "sudo apt-get upgrade -y"
         ]
+        environment_vars = [
+            "DEBIAN_FRONTEND=noninteractive"
+        ]
     }
 
     provisioner "shell" {
@@ -60,6 +63,9 @@ build {
             "sudo apt update",
             "sudo apt install -y nomad"
         ]
+        environment_vars = [
+            "DEBIAN_FRONTEND=noninteractive"
+        ]
     }
 
     # docker
@@ -67,6 +73,9 @@ build {
         inline = [
             "curl -fsSL https://get.docker.com -o /devops/tools/get-docker.sh",
             "sh /devops/tools/get-docker.sh"
+        ]
+        environment_vars = [
+            "DEBIAN_FRONTEND=noninteractive"
         ]
     }
 
