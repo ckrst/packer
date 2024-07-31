@@ -50,8 +50,8 @@ build {
         inline = [
             "sudo apt-get update",
             "sudo apt-get upgrade -y",
-            "mkdir -p /workdir",
-            "mkdir -p /devops/tools",
+            "sudo mkdir -p /workdir",
+            "sudo mkdir -p /devops/tools",
         ]
         environment_vars = [
             "DEBIAN_FRONTEND=noninteractive"
@@ -74,7 +74,7 @@ build {
     provisioner "shell" {
         inline = [
             "curl -fsSL https://get.docker.com -o /devops/tools/get-docker.sh",
-            "sh /devops/tools/get-docker.sh"
+            "sudo sh /devops/tools/get-docker.sh"
         ]
         environment_vars = [
             "DEBIAN_FRONTEND=noninteractive"
