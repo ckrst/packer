@@ -73,7 +73,7 @@ build {
     # docker
     provisioner "shell" {
         inline = [
-            "curl -fsSL https://get.docker.com -o /devops/tools/get-docker.sh",
+            "sudo curl -fsSL https://get.docker.com -o /devops/tools/get-docker.sh",
             "sudo sh /devops/tools/get-docker.sh"
         ]
         environment_vars = [
