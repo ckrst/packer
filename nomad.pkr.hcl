@@ -50,6 +50,8 @@ build {
         inline = [
             "sudo apt-get update",
             "sudo apt-get upgrade -y"
+            "mkdir -p /workdir",
+            "mkdir -p /devops/tools",
         ]
         environment_vars = [
             "DEBIAN_FRONTEND=noninteractive"
