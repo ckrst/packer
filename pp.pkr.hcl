@@ -14,7 +14,7 @@ variable "version" {
 }
 
 source "docker" "pp" {
-    image = "ubuntu:24.04"
+    image = "vinik/base:0.1.0"
     export_path = "image.tar"
     changes = [
         "USER devops",

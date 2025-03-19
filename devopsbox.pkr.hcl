@@ -1,7 +1,7 @@
 
 variable "version" {
     type = string
-    default = "0.1.1"
+    default = "0.1.2"
     description = "Version of the image"
 }
 
@@ -18,7 +18,7 @@ locals {
 }
 
 source "docker" "devopsbox" {
-    image = "ubuntu:latest"
+    image = "vinik/base:0.1.0"
     export_path = "image.tar"
     changes = [
         "USER devops",
