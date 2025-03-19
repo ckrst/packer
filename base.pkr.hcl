@@ -8,6 +8,10 @@ packer {
       source  = "github.com/hashicorp/docker"
       version = "~> 1"
     }
+    armimage {
+        source ="github.com/solo-io/packer-plugin-arm-image"
+        version = "v0.2.7"
+    }
   }
 }
 
@@ -25,7 +29,8 @@ variable "docker_hub_username" {
 
 variable "docker_hub_password" {
   type = string
-  default = "-- Your docker hub password --"
+  default = "-- Your docker h
+ub password --"
 }
 
 # GCP
@@ -73,6 +78,8 @@ source "docker" "container" {
         "VOLUME /workdir"
     ]
 }
+
+source ""
 
 build {
     name = "base"
